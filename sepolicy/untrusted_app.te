@@ -1,0 +1,2 @@
+allow kernel untrusted_app:fd { use } ;
+
