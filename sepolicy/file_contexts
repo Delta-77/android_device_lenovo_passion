@@ -6,11 +6,19 @@
 /(vendor|system/vendor)/bin/vfmService								u:object_r:vfmService_exec:s0
 
 
+# Lights
+
+/sys/devices/soc.0/gpio-leds.71(/.*)?	                                    u:object_r:sysfs_leds:s0
+/sys/devices/soc.0/78b8000\.i2c/i2c-4/4-0064/leds(/.*)?                     u:object_r:sysfs_leds:s0
+/vendor/bin/hw/android\.hardware\.light@2\.0-service\.passion               u:object_r:hal_light_default_exec:s0
+
+
 
 # Fastcharger
-/sys/devices/soc.0/gpio_keys.69(/.*)?						u:object_r:sysfs_charger_supply:s0
-#/sys/devices/soc.0/78b8000.i2c/i2c-4/4-006b/power_supply/ext-charger(/.*)?	u:object_r:sysfs_charger_supply:s0
-#/sys/devices/soc.0/78b8000.i2c/i2c-4/4-006b/power_supply/ext-charger-dual(/.*)? u:object_r:sysfs_charger_supply:s0
+/sys/devices/soc.0/gpio_keys.70(/.*)?						u:object_r:sysfs_charger_supply:s0
+/sys/devices/soc.0/78b8000.i2c/i2c-4/4-006b/power_supply/ext-charger(/.*)?	u:object_r:sysfs_charger_supply:s0
+/sys/devices/soc.0/78b8000.i2c/i2c-4/4-0055/power_supply/battary(/.*)?          u:object_r:sysfs_charger_supply:s0
+/sys/devices/virtual/hwmon/hwmon5/temp1_input                                   u:object_r:sysfs:s0
 
 # Fingerprint
 /dev/vfsspi									u:object_r:vfs_device:s0

@@ -167,4 +167,6 @@ allow init proc_asound:file { getattr } ;
 allow init sysfs_graphics:file { write } ;
 allow init vfmService:process { signull } ;
 allow init hal_fingerprint_hwservice:hwservice_manager { add } ;
+allow init sysfs_leds_writable:file { open } ;
+allow init sysfs_leds_writable:file { write } ;
 

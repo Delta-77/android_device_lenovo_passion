@@ -24,4 +24,5 @@ allow init fingerprintd_data_file:fifo_file { write } ;
 allow init hal_fingerprint_hwservice:hwservice_manager { add } ;
 allow init vfmService:process { signull } ;
 allow vfmService hal_fingerprint_default:process { signull } ;
+allow vfmService init:process { signull } ;
 
