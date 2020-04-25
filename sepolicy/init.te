@@ -170,3 +170,15 @@ allow init hal_fingerprint_hwservice:hwservice_manager { add } ;
 allow init sysfs_leds_writable:file { open } ;
 allow init sysfs_leds_writable:file { write } ;
 
+allow init binder_per_mgr_service:service_manager { add } ;
+allow init hal_light_hwservice:hwservice_manager { add } ;
+allow init hidl_base_hwservice:hwservice_manager { add } ;
+allow init init:socket { read } ;
+allow init proc:file { getattr open read} ;
+allow init proc_filesystems:file { getattr } ;
+allow init sysfs:file { open setattr write } ;
+allow init sysfs_boot_adsp:file { setattr } ;
+allow init sysfs_graphics:file { open read } ;
+allow init vendor_file:file { execute_no_trans } ;
+allow init vfat:file { getattr open read} ;
+

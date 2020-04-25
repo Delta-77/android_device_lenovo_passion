@@ -15,3 +15,7 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/lineage_passion.mk
+
+COMMON_LUNCH_CHOICES := \
+	lineage_passion-eng \
+	lineage_passion-userdebug

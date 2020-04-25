@@ -19,4 +19,7 @@ allow fingerprintd vfmService:process { signull };
 
 allow hal_fingerprint_default vfmService:process { signull } ;
 allow hal_fingerprint_default fingerprintd_data_file:fifo_file { lock read open write } ;
+allow hal_fingerprint_default fingerprintd_data_file:dir { add_name read write open } ;
+allow hal_fingerprint_default fingerprintd_data_file:file { getattr create read write open } ;
+
 

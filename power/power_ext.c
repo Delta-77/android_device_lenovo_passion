@@ -22,7 +22,7 @@
 #define LOG_TAG "PowerHAL_MSM8939_Ext"
 #include <utils/Log.h>
 
-#define BIG_MAX_CPU_PATH "/sys/devices/system/cpu/kernel_max"
+#define BIG_MAX_CPU_PATH "/sys/devices/system/cpu/cpu0/core_ctl/max_cpus"
 
 static void sysfs_write(char *path, char *s)
 {

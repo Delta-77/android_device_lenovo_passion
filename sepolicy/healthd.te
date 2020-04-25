@@ -16,4 +16,5 @@ allow healthd sysfs_usb_supply : dir { ioctl read getattr search open } ;
 allow healthd sysfs_usb_supply : file { ioctl read getattr lock open } ; 
 allow healthd sysfs_usb_supply : lnk_file { ioctl read getattr lock open } ; 
 allow healthd sysfs:file { getattr open read } ;
+=
 

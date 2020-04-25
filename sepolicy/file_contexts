@@ -21,8 +21,9 @@
 /sys/devices/virtual/hwmon/hwmon5/temp1_input                                   u:object_r:sysfs:s0
 
 # Fingerprint
+/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.0-service.passion u:object_r:hal_fingerprint_default_exec:s0
 /dev/vfsspi									u:object_r:vfs_device:s0
-
+/dev/validity(/.*)?							        u:object_r:fingerprintd_data_file:s0
 /data/validity(/.*)?								u:object_r:fingerprintd_data_file:s0
 
 # Gestures
@@ -31,6 +32,9 @@
 
 # Location
 /system/vendor/bin/location-mq                      u:object_r:location_exec:s0
+
+#Root files
+/firmware(/.*)?						u:object_r:firmware_file:s0
 
 # tfa9890
 /dev/i2c-4									u:object_r:audio_device:s0
@@ -71,5 +75,3 @@
 
 
 
-
-/dev/validity(/.*)?							        u:object_r:fingerprintd_data_file:s0

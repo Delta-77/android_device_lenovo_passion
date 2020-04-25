@@ -301,9 +301,9 @@ on boot
     mkdir /data/validity 0775 system system
     mkdir /dev/validity 0775 system system
 
-on property:sys.listeners.registered=true
+on property:vendor.sys.listeners.registered=true
+     setprop persist.vendor.fp.gesture 1
      start vfmService
-
 
 #lenovo-sw, chenzz3, added fingerprint daemon service, begin
 #synaptics fingerprint service
@@ -541,18 +541,20 @@ on property:bluetooth.startbtsnoop=true
 on property:bluetooth.startbtsnoop=false
     stop btsnoop
 
-service qcom-c_main-sh /system/bin/sh /init.class_main.sh
+service qcom-c_main-sh /system/bin/sh /system/vendor/bin/init.class_main.sh
     class main
     user root
     oneshot
 
 on property:vold.decrypt=trigger_restart_framework
+    setprop persist.vendor.fp.gesture 1
+    start vfmService
     start qcom-c_main-sh
     start wcnss-service
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
-    service fm_dl /system/bin/sh /init.qti.fm.sh
+    service fm_dl /system/bin/sh /system/vendor/bin/init.qti.fm.sh
     class late_start
     user system
     group system
@@ -817,6 +819,7 @@ service bugreport /system/bin/dumpstate -d -p -B \
 
 on property:ro.bootmode=charger
 class_start charger
+
 
 on charger
     wait /dev/block/bootdevice/by-name/system

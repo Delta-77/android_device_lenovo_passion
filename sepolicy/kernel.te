@@ -1,0 +1,4 @@
+allow kernel kernel:capability { dac_override } ;
+allow kernel vfat:file { getattr } ;
+allow kernel vfat:file { open } ;
+
