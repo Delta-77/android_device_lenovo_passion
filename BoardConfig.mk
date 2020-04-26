@@ -120,7 +120,7 @@ TARGET_NEEDS_LEGACY_CAMERA_HAL1_DYN_NATIVE_HANDLE := true
 TARGET_USE_VENDOR_CAMERA_EXT           := true
 TARGET_USES_QTI_CAMERA_DEVICE          := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE    := \
-    /system/vendor/bin/mm-qcamera-daemon=23 \
+    /system/bin/mm-qcamera-daemon=23 \
     /system/bin/mediaserver=23
 
 
