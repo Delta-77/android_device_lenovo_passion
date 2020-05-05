@@ -36,13 +36,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.voice.path.for.pcm.voip=true \
     ro.audio.sdk.fluencetype=fluence \
     ro.audio.sdk.ssr=false \
-    audio.tunnel.encode=false
+    audio.tunnel.encode=false \
+    audio_hal.period_size=192 \
+    af.fast_track_multiplier=1
 
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.hfp.client=1 \
-    vendor.qcom.bluetooth.soc=smd \
+    vendor.qcom.bluetooth.soc=pronto \
+    vendor.bluetooth.soc=pronto \
     ro.bluetooth.hfp.ver=1.7 \
     ro.qualcomm.bt.hci_transport=smd \
     ro.bluetooth.dun=true \
@@ -53,7 +56,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bluetooth.map=true \
     ro.qualcomm.bluetooth.nap=true \
     ro.qualcomm.bluetooth.opp=true \
-    ro.qualcomm.bluetooth.pbap=true
+    ro.qualcomm.bluetooth.pbap=true \
+    persist.vendor.bt.enable.splita2dp=false
 
 #    vendor.qcom.bluetooth.soc=pronto \
 
