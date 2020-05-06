@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013-2014, The CyanogenMod Project
+ *           (C) 2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,6 +58,8 @@ static int is_speaker(uint32_t snd_device) {
         case SND_DEVICE_OUT_SPEAKER_AND_HDMI:
         case SND_DEVICE_OUT_SPEAKER_AND_USB_HEADSET:
         case SND_DEVICE_OUT_SPEAKER_AND_ANC_HEADSET:
+        case SND_DEVICE_OUT_HDMI:    //needed for turn on speakerphone at dialer //delta_77 commit
+
             speaker = 1;
             break;
     }
@@ -71,15 +74,19 @@ static int is_voice_speaker(uint32_t snd_device) {
 static int amp_enable_output_devices(hw_device_t *device, uint32_t devices, bool enable) {
     tfa9890_device_t *tfa9890 = (tfa9890_device_t*) device;
 
-    if (is_speaker(devices)) 
+    if (is_speaker(devices))
        {
-        tfa9890->enable(1);
-            if (is_voice_speaker(devices)) 
-               {
-                tfa9890->eq_set(1);
-                 } else {
-                tfa9890->eq_set(0);
-               }
+          tfa9890->enable(1);
+       if (enable) { 
+               if (is_voice_speaker(devices)) 
+                  {
+                   tfa9890->eq_set(1); 
+                         } else  { 
+                    tfa9890->eq_set(0);
+                                         }
+            } else { 
+               tfa9890->enable(0);
+         }
        }
     return 0;
 }
@@ -139,6 +146,7 @@ static int amp_module_open(const hw_module_t *module,
     *(void **)&tfa9890_dev->eq_set = dlsym(tfa9890_dev->lib_ptr, "tfa9890_EQset");
     *(void **)&tfa9890_dev->enable = dlsym(tfa9890_dev->lib_ptr, "audio_smartpa_enable");
 
+
     if (!tfa9890_dev->init || !tfa9890_dev->eq_set || !tfa9890_dev->enable) {
         ALOGE("%s:%d: Unable to find required symbols", __func__, __LINE__);
         dlclose(tfa9890_dev->lib_ptr);
@@ -167,7 +175,7 @@ amplifier_module_t HAL_MODULE_INFO_SYM = {
         .module_api_version = AMPLIFIER_MODULE_API_VERSION_0_1,
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = AMPLIFIER_HARDWARE_MODULE_ID,
-        .name = "Passion amplifier HAL",
+        .name = "Passion amplifier HAL modifed Delta_77 4pda.ru",
         .author = "The CyanogenMod Open Source Project",
         .methods = &hal_module_methods,
     },
