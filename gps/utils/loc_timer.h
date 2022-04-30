@@ -41,7 +41,7 @@ extern "C" {
   Success = 0
   Failure = Non zero
 */
-typedef void(*loc_timer_callback)(void *user_data, int result);
+typedef void (*loc_timer_callback)(void *user_data, int32_t result);
 
 
 /*
