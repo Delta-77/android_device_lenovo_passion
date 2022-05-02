@@ -217,7 +217,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qcom.ad.sensortype=2
 
 # USB debugging
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	persist.sys.usb.config=mtp,adb \
 	persist.service.adb.enable=1 \
         persist.service.debuggable=1 \
