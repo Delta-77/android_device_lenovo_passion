@@ -17,7 +17,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := atomic.c
-LOCAL_WHOLE_STATIC_LIBRARIES := libcutils
+LOCAL_WHOLE_STATIC_LIBRARIES := libcutils libbase
 LOCAL_SHARED_LIBRARIES := liblog
 LOCAL_MODULE := libc_util
 LOCAL_MODULE_TAGS := optional

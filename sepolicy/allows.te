@@ -1,0 +1,3 @@
+allow init sysfs_poweron_alarm:file { open write } ;
+allow qti_init_shell toolbox_exec:file { execute_no_trans } ;
+allow system_server dalvikcache_data_file:file { execute } ;

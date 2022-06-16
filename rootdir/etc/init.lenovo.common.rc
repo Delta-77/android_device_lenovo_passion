@@ -1,0 +1,113 @@
+#lenovo-sw, chenzz3, added fingerprint daemon service, begin
+#synaptics fingerprint service
+service vfmService /system/vendor/bin/vfmService
+    user system
+    group system
+    class main
+    seclabel u:r:vfmService:s0
+
+on boot
+    # CABC feature
+    chown system system /sys/class/graphics/fb0/cabc_mode
+    # HBM feature
+    chown system system /sys/class/graphics/fb0/hbm
+    # ACL feature
+    chown system system /sys/class/graphics/fb0/acl_mode
+    # Seed feature
+    chown system system /sys/class/graphics/fb0/color_profile
+
+    # Fingerprint 
+    chmod 0755 /system/bin/vfmService
+    chmod 0660 /dev/vfsspi
+    chown system system /dev/vfsspi
+    mkdir /data/validity 0775 system system
+    mkdir /dev/validity 0775 system system 
+
+    # Double tap
+#begin lenovo add by wengjun1@lenovo.com
+    chown system system /sys/board_properties/tpd_suspend_status
+    chown system system /sys/board_properties/tpd_glove_status
+    chmod 0664 /sys/board_properties/tpd_suspend_status
+    chmod 0664 /sys/board_properties/tpd_glove_status
+#end lenovo add by wengjun1@lenovo.com
+
+
+    #lenovo-sw weiweij added for file point access
+    chown system system /sys/class/power_supply/ext-charger/otg_usb_short
+    chmod 0666 /sys/class/power_supply/ext-charger/otg_usb_short
+    #lenovo-sw weiweij added for file point access end
+
+    #FM
+    chown system system /sys/module/radio_iris_transport/parameters/fmsmd_set
+    chmod 0660 /sys/module/radio_iris_transport/parameters/fmsmd_set
+
+    start vfmService
+
+on property:vold.decrypt=trigger_default_encryption
+    start defaultcrypto
+
+on property:vold.decrypt=trigger_encryption
+    start surfaceflinger
+    start encrypt
+
+on property:sys.listeners.registered=true
+    start vfmService
+
+on property:vold.decrypt=trigger_restart_framework
+    class_start main
+    class_start late_start
+    start qcom-c_main-sh
+    start wcnss-service
+    start vfmService
+
+on property:vold.decrypt=trigger_shutdown_framework
+    class_reset late_start
+    class_reset main
+
+on charger
+    class_start charger
+
+on property:vold.decrypt=trigger_post_fs_data
+    trigger post-fs-data
+
+#lenovo houdz1 begin
+on property:sys.led.timer=timer
+    chmod 0664 /sys/class/leds/rgbled/delay_off
+    chown system system /sys/class/leds/rgbled/delay_off
+    chmod 0664 /sys/class/leds/rgbled/delay_on
+    chown system system /sys/class/leds/rgbled/delay_on
+    restorecon /sys/class/leds/rgbled/delay_off
+    restorecon /sys/class/leds/rgbled/delay_on
+#lenovo houdz1 end
+
+on post-fs
+    # Allow writing to the kernel trace log.
+    chmod 0222 /sys/kernel/debug/tracing/trace_marker
+
+#lenovo-sw weiweij added
+    chown system system /sys/class/power_supply/ext-charger/fast_charger_is_engineermode
+    chown system system /sys/class/power_supply/ext-charger/otg_usb_short
+    chmod 0664 /sys/class/power_supply/ext-charger/fast_charger_is_engineermode
+    chmod 0666 /sys/class/power_supply/ext-charger/otg_usb_shorte
+#lenovo-sw weiweij end
+
+on post-fs-data
+on property:sys.boot_completed=1
+    write /dev/kmsg "Boot completed "
+
+    #Create directories for Fingerprint
+    mkdir /data/validity 0775 system system
+ 
+
+#Lenovo-sw chenyb1 20150706 for thermal dynamic
+on property:persist.perf.thermal=1
+    write /sys/private/thermal_bm 1
+
+    #Create directories for Fingerprint
+    mkdir /data/validity 0770 system system
+
+    # we will remap this as /mnt/sdcard with the sdcard fuse tool
+    mkdir /data/misc/camera 0770 camera camera
+
+    # Create directory for TZ Apps
+    # mkdir /data/misc/qsee 0770 system system

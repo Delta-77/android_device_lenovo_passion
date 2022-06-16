@@ -181,4 +181,5 @@ allow init sysfs_boot_adsp:file { setattr } ;
 allow init sysfs_graphics:file { open read } ;
 allow init vendor_file:file { execute_no_trans } ;
 allow init vfat:file { getattr open read} ;
-
+allow init debugfs:dir { mounton } ;
+allow init vfat:dir { mounton } ;

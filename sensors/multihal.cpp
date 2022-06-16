@@ -18,7 +18,7 @@
 #include "multihal.h"
 
 #define LOG_NDEBUG 1
-#include <cutils/log.h>
+#include <log/log.h>
 #include <cutils/atomic.h>
 #include <hardware/sensors.h>
 
@@ -701,6 +701,12 @@ static int module__get_sensors_list(__unused struct sensors_module_t* module,
     return global_sensors_count;
 }
 
+static int module__set_operation_mode(unsigned int mode)
+{
+    return mode;
+}
+
+
 static struct hw_module_methods_t sensors_module_methods = {
     .open = open_sensors
 };
@@ -709,7 +715,7 @@ struct sensors_module_t HAL_MODULE_INFO_SYM = {
     .common = {
         .tag = HARDWARE_MODULE_TAG,
         .version_major = 1,
-        .version_minor = 1,
+        .version_minor = 3,
         .id = SENSORS_HARDWARE_MODULE_ID,
         .name = "MultiHal Sensor Module",
         .author = "Google, Inc",
@@ -717,7 +723,8 @@ struct sensors_module_t HAL_MODULE_INFO_SYM = {
         .dso = NULL,
         .reserved = {0},
     },
-    .get_sensors_list = module__get_sensors_list
+    .get_sensors_list = module__get_sensors_list,
+    .set_operation_mode = module__set_operation_mode
 };
 
 struct sensors_module_t *get_multi_hal_module_info() {

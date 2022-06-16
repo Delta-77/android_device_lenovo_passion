@@ -18,6 +18,8 @@ DEVICE_PATH := device/lenovo/passion
 
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
+# APEX
+TARGET_FLATTEN_APEX := true
 
 # Platform
 TARGET_BOARD_PLATFORM     := msm8916
@@ -68,11 +70,13 @@ AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_ENABLED_NEW_SAMPLE_RATE      := true
 AUDIO_FEATURE_ENABLED_PROXY_DEVICE         := true
 
+#BOARD_SUPPORTS_SOUND_TRIGGER               := true
 BOARD_USES_ALSA_AUDIO                      := true
 
 TARGET_USES_QCOM_MM_AUDIO := true
 AUDIO_FEATURE_ENABLED_DS2_DOLBY_DAP := false
 
+AUDIO_FEATURE_ENABLED_SMART_PA_TFA_98XX := true
 
 AUDIO_FEATURE_ENABLED_NEW_SAMPLE_RATE   := true
 AUDIO_FEATURE_ENABLED_AAC_ADTS_OFFLOAD  := true
@@ -275,6 +279,7 @@ TARGET_HAS_LEGACY_POWER_STATS       := true
 #TARGET_HAS_NO_POWER_STATS           := true
 TARGET_HAS_NO_WLAN_STATS            := true
 TARGET_USES_INTERACTION_BOOST       := true
+TARGET_PROVIDES_POWERHAL	     := true
 
 # Enable real time lockscreen charging current values
 BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
@@ -317,6 +322,10 @@ TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib/libmmcamera2_stats_algorithm.so|libc_util.so \
     /system/vendor/lib/libmmcamera_wavelet_lib.so|libc_util.so
 
+# Snapdragon LLVM
+TARGET_USE_SDCLANG := true
+# SurfaceFlinger
+TARGET_USE_AOSP_SURFACEFLINGER := true
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
 

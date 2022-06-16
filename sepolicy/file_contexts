@@ -18,6 +18,7 @@
 /sys/devices/soc.0/gpio_keys.70(/.*)?						u:object_r:sysfs_charger_supply:s0
 /sys/devices/soc.0/78b8000.i2c/i2c-4/4-006b/power_supply/ext-charger(/.*)?	u:object_r:sysfs_charger_supply:s0
 /sys/devices/soc.0/78b8000.i2c/i2c-4/4-0055/power_supply/battary(/.*)?          u:object_r:sysfs_charger_supply:s0
+/sys/devices/soc.0/78b8000.i2c/i2c-4/4-006b/power_supply/ext-charger-dual(/.*)? u:object_r:sysfs_charger_supply:s0
 /sys/devices/virtual/hwmon/hwmon5/temp1_input                                   u:object_r:sysfs:s0
 
 # Fingerprint
@@ -72,6 +73,3 @@
 
 #fastcharger
 /sys/class/power_supply/ext-charger/fast_charger_en u:object_r:sysfs_charger_supply:s0
-
-
-

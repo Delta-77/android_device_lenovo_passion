@@ -246,3 +246,15 @@
 
 # Add device block for FRP
 /dev/block/platform/soc.0/7824900.sdhci/by-name/config    0660   system     system
+
+# sys-fs display
+/sys/class/graphics/fb0     idle_time                0664    system  graphics
+/sys/class/graphics/fb0     dynamic_fps              0664    system  graphics
+/sys/class/graphics/fb0     dyn_pu                   0664    system  graphics
+/sys/class/graphics/fb0     modes                    0664    system  graphics
+/sys/class/graphics/fb0     mode                     0664    system  graphics
+
+# Firmware directory Path
+# Below macro will be read by uevent and path will
+# be added to search path for firmware loading
+firmware_directories /firmware/image/

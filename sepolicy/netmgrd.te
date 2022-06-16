@@ -1,4 +1,3 @@
 #allow netmgrd self:capability { dac_override };
 allow netmgrd sysfs:file getattr;
 allow netmgrd sysfs_net:dir search;
-
